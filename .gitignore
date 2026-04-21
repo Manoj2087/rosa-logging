@@ -1,0 +1,38 @@
+# ------------------------------
+# Terraform
+# ------------------------------
+**/.terraform/
+**/.terraform.lock.hcl.backup
+**/terraform.tfstate
+**/terraform.tfstate.*
+**/crash.log
+**/crash.*.log
+
+# CLI overrides (rarely committed)
+**/override.tf
+**/override.tf.json
+**/*_override.tf
+**/*_override.tf.json
+
+# Variables files (often contain secrets)
+**/*.tfvars
+**/*.tfvars.json
+**/*.auto.tfvars
+**/*.auto.tfvars.json
+!**/*.tfvars.example
+!**/*.auto.tfvars.example
+
+# Local plan output
+**/*.tfplan
+
+# ------------------------------
+# Helm
+# ------------------------------
+# Packaged charts
+**/*.tgz
+
+# Dependency builds
+**/charts/
+
+# Helm lockfile is often reproducible; ignore if you don't want it committed
+**/Chart.lock
