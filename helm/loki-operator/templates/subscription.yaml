@@ -1,0 +1,17 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: {{ .Values.subscription.name | quote }}
+  namespace: {{ .Values.installNamespace | quote }}
+  labels:
+    {{- include "loki-operator.labels" . | nindent 4 }}
+  {{- if gt (len (.Values.commonAnnotations | default dict)) 0 }}
+  annotations:
+    {{- include "loki-operator.annotations" . | nindent 4 }}
+  {{- end }}
+spec:
+  name: {{ .Values.subscription.name | quote }}
+  channel: {{ .Values.subscription.channel | quote }}
+  installPlanApproval: {{ .Values.subscription.installPlanApproval | quote }}
+  source: {{ .Values.subscription.source | quote }}
+  sourceNamespace: {{ .Values.subscription.sourceNamespace | quote }}

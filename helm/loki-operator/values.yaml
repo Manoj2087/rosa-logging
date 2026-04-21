@@ -1,0 +1,25 @@
+# Namespace where the operator will be installed (i.e., where the Subscription lives).
+installNamespace: openshift-operators-redhat
+
+# Create the install namespace if it doesn't exist.
+createNamespace: false
+
+namespaceLabels: {
+  openshift.io/cluster-monitoring: "true"
+}
+namespaceAnnotations: {}
+
+operatorGroup:
+  name: "loki-operator"
+  updateStrategy: Default
+
+subscription:
+  name: loki-operator
+  channel: stable-6.3
+  installPlanApproval: Automatic
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+
+# Extra labels/annotations applied to all rendered objects.
+commonLabels: {}
+commonAnnotations: {}

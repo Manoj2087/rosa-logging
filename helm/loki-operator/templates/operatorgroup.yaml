@@ -1,0 +1,13 @@
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: {{ default (printf "%s-og" (include "loki-operator.fullname" .)) .Values.operatorGroup.name | quote }}
+  namespace: {{ .Values.installNamespace | quote }}
+  labels:
+    {{- include "loki-operator.labels" . | nindent 4 }}
+  {{- if gt (len (.Values.commonAnnotations | default dict)) 0 }}
+  annotations:
+    {{- include "loki-operator.annotations" . | nindent 4 }}
+  {{- end }}
+spec:
+  updateStrategy: {{ .Values.operatorGroup.updateStrategy | quote }}

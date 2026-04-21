@@ -1,0 +1,20 @@
+{{- if .Values.createNamespace }}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Values.installNamespace | quote }}
+  labels:
+    {{- include "loki-operator.labels" . | nindent 4 }}
+    {{- with .Values.namespaceLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  {{- $common := .Values.commonAnnotations | default dict }}
+  {{- $ns := .Values.namespaceAnnotations | default dict }}
+  {{- if or (gt (len $common) 0) (gt (len $ns) 0) }}
+  annotations:
+    {{- include "loki-operator.annotations" . | nindent 4 }}
+    {{- with .Values.namespaceAnnotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  {{- end }}
+{{- end }}
